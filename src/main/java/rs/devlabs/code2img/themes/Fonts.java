@@ -20,7 +20,6 @@ public final class Fonts {
     public static final Font FIRA_CODE = new Font("Fira Code", Font.PLAIN, 14);
     public static final Font FIRA_MONO = new Font("Fira Mono", Font.PLAIN, 14);
     public static final Font HACK = new Font("Hack", Font.PLAIN, 14);
-    public static final Font HERMIT = new Font("Hermit", Font.PLAIN, 14);
     public static final Font IBM_PLEX_MONO = new Font("IBM Plex Mono", Font.PLAIN, 14);
     public static final Font INCONSOLATA = new Font("Inconsolata", Font.PLAIN, 14);
     public static final Font JETBRAINS_MONO = new Font("JetBrains Mono NL", Font.PLAIN, 14);
@@ -29,6 +28,7 @@ public final class Fonts {
     public static final Font ROBOTO_MONO = new Font("Roboto Mono", Font.PLAIN, 14);
     public static final Font SOURCE_CODE_PRO = new Font("Source Code Pro", Font.PLAIN, 14);
     public static final Font SPACE_MONO = new Font("Space Mono", Font.PLAIN, 14);
+    public static final Font SUDO = new Font("Sudo", Font.PLAIN, 14);
     public static final Font UBUNTU_MONO = new Font("Ubuntu Mono", Font.PLAIN, 14);
 
     public static Font customFont(String ttf, int style, float size) throws FileNotFoundException, FontFormatException, IOException {

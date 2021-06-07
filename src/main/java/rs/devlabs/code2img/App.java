@@ -1,5 +1,6 @@
 package rs.devlabs.code2img;
 
+import java.awt.Font;
 import java.awt.FontFormatException;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -18,8 +19,8 @@ public class App {
         Code2ImageSettingsBuilder settingsBuilder = new Code2ImageSettingsBuilder();
         Code2ImageSettings settings = settingsBuilder
                 //                .setFont(new Font("JetBrains Mono NL", Font.PLAIN, 14))
-                .setFont(Fonts.DEFAULT)
-                //                .setFont(Fonts.customFont("FiraCode", Font.PLAIN, 14))
+                //                .setFont(Fonts.DEFAULT)
+                .setFont(Fonts.customFont("Sudo", Font.PLAIN, 18))
                 .setMargin(10)
                 .setRectangleArc(15)
                 .setButtonRadius(12)
