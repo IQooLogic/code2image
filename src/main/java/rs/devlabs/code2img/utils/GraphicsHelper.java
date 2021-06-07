@@ -10,25 +10,22 @@ import java.awt.image.BufferedImage;
 import java.util.List;
 import java.util.Optional;
 import rs.devlabs.code2img.Code2ImageSettingsBuilder.Code2ImageSettings;
-import rs.devlabs.code2img.Lexer;
 import rs.devlabs.code2img.Token;
 
 /**
  *
  * @author Milos Stojkovic <iqoologic@gmail.com>
  */
-public class GraphicsHelper {
+public final class GraphicsHelper {
 
     private static final String CREATED_BY_TEXT = "// created by code2image™";// watermark text or can be image
     private final Code2ImageSettings settings;
-    private final Lexer lexer;
 
     private int lineHeight = -1;
     private int lineNumberFigures = -1;
 
-    public GraphicsHelper(Code2ImageSettings settings, Lexer lexer) {
+    public GraphicsHelper(Code2ImageSettings settings) {
         this.settings = settings;
-        this.lexer = lexer;
     }
 
     public void drawWindow(Graphics2D g, Dimension imageDimensions) {
@@ -45,14 +42,14 @@ public class GraphicsHelper {
             int lineNumber = 1;
             for (String line : lines) {
                 drawLineNumber(g, lineNumber++, settings.getMargin(), y);
-                drawLine(lexer, line, g, x, y, metrics);
+                drawLine(line, g, x, y, metrics);
 
                 x = spaceForLineNumbers;// resets x for next line
                 y += lineHeight;// move y down by one line height
             }
         } else {
             for (String line : lines) {
-                drawLine(lexer, line, g, x, y, metrics);
+                drawLine(line, g, x, y, metrics);
                 x = settings.getMargin();// resets x for next line
                 y += lineHeight;// move y down by one line height
             }
@@ -63,8 +60,8 @@ public class GraphicsHelper {
         }
     }
 
-    private void drawLine(Lexer lexer, String line, Graphics2D g, int x, int y, FontMetrics metrics) {
-        List<Token> tokens = lexer.parse(line, 0);
+    private void drawLine(String line, Graphics2D g, int x, int y, FontMetrics metrics) {
+        List<Token> tokens = LexerUtils.parse(line, 0);
 
         for (int i = 0; i < line.length(); i++) {// basicaly jumping from token to token
             Optional<Token> optToken = findTokenByStart(i, tokens);
@@ -134,7 +131,7 @@ public class GraphicsHelper {
             int width = metrics.stringWidth(optLongestLine.get()) + 4 * settings.getMargin();
             int height = lineHeight * lines.size() + settings.getButtonsHeight() + 2 * settings.getMargin();
             if (settings.isDrawLineNumbers()) {
-                width += calculateLineNumbersSpace(lines.size(), metrics);
+                width += calculateLineNumbersSpace(metrics);
             }
             if (settings.isDrawCreatedByText()) {
                 height += 2 * lineHeight;
@@ -144,7 +141,7 @@ public class GraphicsHelper {
         throw new IllegalArgumentException();
     }
 
-    private int calculateLineNumbersSpace(int numberOfLines, FontMetrics metrics) {
+    private int calculateLineNumbersSpace(FontMetrics metrics) {
         return 2 * settings.getButtonSpace() + lineNumberFigures * metrics.charWidth('a');
     }
 

@@ -18,8 +18,9 @@ import rs.devlabs.code2img.utils.LexerUtils;
  *
  * @author Milos Stojkovic <iqoologic@gmail.com>
  */
-public class Code2ImageConverter {
+public final class Code2ImageConverter {
 
+    // TODO : add more languages
     // TODO : add method font to theme interface
     // TODO : support for more fonts (font preset as themes) and load them from file (fonts must be monospaced)
     // TODO : ability to change font style (italic, bold, plain) based on token type (for comment to be italic)
@@ -31,13 +32,11 @@ public class Code2ImageConverter {
     // TODO : when syntax highlighting is implemented choose language by file extension
     // TODO : create rest api endpoint for this (send settings and api returns image)
     private final Code2ImageSettings settings;
-    private Lexer lexer;
-    private GraphicsHelper graphicsHelper;
-    private Graphics2D g;
-    private FontMetrics metrics;
+    private final GraphicsHelper graphicsHelper;
 
     public Code2ImageConverter(Code2ImageSettings settings) {
         this.settings = settings;
+        this.graphicsHelper = new GraphicsHelper(settings);
     }
 
     public BufferedImage convert(File fileToConvert) throws IOException, NoSuchFileException {
@@ -46,15 +45,13 @@ public class Code2ImageConverter {
             throw new IllegalArgumentException("File is empty!");
         }
 
-        lexer = LexerUtils.getLexerByExtension(fileToConvert);
-
-        graphicsHelper = new GraphicsHelper(settings, lexer);
+        LexerUtils.chooseLexerForFile(fileToConvert);
 
         Dimension imageDimensions = graphicsHelper.calculateImageDimensions(lines);
         BufferedImage image = ImageUtils.create(imageDimensions);
-        g = graphicsHelper.createGraphics(image);
+        Graphics2D g = graphicsHelper.createGraphics(image);
 
-        metrics = g.getFontMetrics(settings.getFont());
+        FontMetrics metrics = g.getFontMetrics(settings.getFont());
 
         graphicsHelper.drawWindow(g, imageDimensions);
         graphicsHelper.drawWindowButtons(g);
