@@ -24,8 +24,8 @@ public class App {
                 .setTheme(Themes.A11YDARK)
                 .setFormat(ImageFormat.PNG)
                 .build();
-        Code2ImageConverter converter = new Code2ImageConverter(settings);
-        converter.convertAndSave("./src/test/resources/code.txt", "code.png");// FIXME : get file name and call image the same name and attach image format extension
+        Code2Image converter = new Code2Image(settings);
+        converter.convertAndSave("./src/test/resources/code.txt", "code." + ImageFormat.PNG.getExtension());
     }
 
 }

@@ -18,7 +18,7 @@ import rs.devlabs.code2img.App;
  *
  * @author Milos Stojkovic <iqoologic@gmail.com>
  */
-public class FileUtils {
+public final class FileUtils {
 
     private FileUtils() {
     }

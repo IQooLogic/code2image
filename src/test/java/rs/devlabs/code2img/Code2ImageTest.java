@@ -22,9 +22,9 @@ import rs.devlabs.code2img.Code2ImageSettingsBuilder.Code2ImageSettings;
  *
  * @author Milos Stojkovic <iqoologic@gmail.com>
  */
-public class Code2ImageConverterTest {
+public class Code2ImageTest {
 
-    public Code2ImageConverterTest() {
+    public Code2ImageTest() {
     }
 
     @BeforeAll
@@ -49,7 +49,7 @@ public class Code2ImageConverterTest {
         System.out.println("convert");
         File fileToConvert = new File("src/test/resources/code.txt");
         Code2ImageSettings settings = new Code2ImageSettingsBuilder().build();
-        Code2ImageConverter instance = new Code2ImageConverter(settings);
+        Code2Image instance = new Code2Image(settings);
         BufferedImage result = instance.convert(fileToConvert);
         assertNotEquals(null, result, "Image must not be null");
         Assertions.assertDoesNotThrow(() -> instance.convert(fileToConvert));
@@ -61,7 +61,7 @@ public class Code2ImageConverterTest {
         Exception exception = assertThrows(NoSuchFileException.class, () -> {
             File fileToConvert = new File("nonexistant.txt");
             Code2ImageSettings settings = new Code2ImageSettingsBuilder().build();
-            Code2ImageConverter instance = new Code2ImageConverter(settings);
+            Code2Image instance = new Code2Image(settings);
             instance.convert(fileToConvert);
         });
 
@@ -76,7 +76,7 @@ public class Code2ImageConverterTest {
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
             File fileToConvert = new File("src/test/resources/empty.txt");
             Code2ImageSettings settings = new Code2ImageSettingsBuilder().build();
-            Code2ImageConverter instance = new Code2ImageConverter(settings);
+            Code2Image instance = new Code2Image(settings);
             instance.convert(fileToConvert);
         });
 
@@ -91,7 +91,7 @@ public class Code2ImageConverterTest {
         File fileToConvert = new File("src/test/resources/code.txt");
         File fileOutput = new File("src/test/resources/code.png");
         Code2ImageSettings settings = new Code2ImageSettingsBuilder().build();
-        Code2ImageConverter instance = new Code2ImageConverter(settings);
+        Code2Image instance = new Code2Image(settings);
         instance.convertAndSave(fileToConvert, fileOutput);
         assertTrue(fileOutput.exists(), "code.png must exist!");
     }
@@ -100,7 +100,7 @@ public class Code2ImageConverterTest {
     public void testConvertAndSaveAs_3args_2() throws Exception {
         System.out.println("convertAndSave with string");
         Code2ImageSettings settings = new Code2ImageSettingsBuilder().build();
-        Code2ImageConverter instance = new Code2ImageConverter(settings);
+        Code2Image instance = new Code2Image(settings);
         instance.convertAndSave("src/test/resources/code.txt", "src/test/resources/code.png");
         assertTrue(Files.exists(Path.of("src/test/resources/code.png")), "code.png must exist!");
     }

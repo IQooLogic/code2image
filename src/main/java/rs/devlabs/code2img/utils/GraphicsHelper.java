@@ -28,6 +28,20 @@ public final class GraphicsHelper {
         this.settings = settings;
     }
 
+    public BufferedImage draw(List<String> lines) {
+        Dimension imageDimensions = calculateImageDimensions(lines);
+        BufferedImage image = ImageUtils.create(imageDimensions);
+        Graphics2D g = createGraphics(image);
+
+        FontMetrics metrics = g.getFontMetrics(settings.getFont());
+
+        drawWindow(g, imageDimensions);
+        drawWindowButtons(g);
+        drawLines(g, metrics, lines);
+
+        return image;
+    }
+
     public void drawWindow(Graphics2D g, Dimension imageDimensions) {
         g.setPaint(settings.getTheme().background());
         g.fillRoundRect(0, 0, imageDimensions.width, imageDimensions.height, settings.getRectangleArc(), settings.getRectangleArc());

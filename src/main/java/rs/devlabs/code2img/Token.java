@@ -33,6 +33,10 @@ public class Token implements Serializable, Comparable {
 
     /**
      * Constructs a new token
+     *
+     * @param type
+     * @param start
+     * @param length
      */
     public Token(TokenType type, long start, long length) {
         this.type = type;
@@ -43,6 +47,11 @@ public class Token implements Serializable, Comparable {
 
     /**
      * Construct a new part of pair token
+     *
+     * @param type
+     * @param start
+     * @param length
+     * @param pairValue
      */
     public Token(TokenType type, long start, long length, byte pairValue) {
         this.type = type;

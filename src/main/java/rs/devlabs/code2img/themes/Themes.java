@@ -4,7 +4,7 @@ package rs.devlabs.code2img.themes;
  *
  * @author Milos Stojkovic <iqoologic@gmail.com>
  */
-public class Themes {
+public final class Themes {
 
     public static final Theme A11YDARK = new A11yDarkTheme();
     public static final Theme BASE16DARK = new Base16DarkTheme();

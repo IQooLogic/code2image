@@ -33,11 +33,7 @@ public enum TokenType {
      * @return
      */
     public static boolean isComment(Token t) {
-        if (t != null && (t.type == COMMENT || t.type == COMMENT2)) {
-            return true;
-        } else {
-            return false;
-        }
+        return t != null && (t.type == COMMENT || t.type == COMMENT2);
     }
 
     /**
@@ -47,11 +43,7 @@ public enum TokenType {
      * @return
      */
     public static boolean isKeyword(Token t) {
-        if (t != null && (t.type == KEYWORD || t.type == KEYWORD2)) {
-            return true;
-        } else {
-            return false;
-        }
+        return t != null && (t.type == KEYWORD || t.type == KEYWORD2);
     }
 
     /**
@@ -61,10 +53,6 @@ public enum TokenType {
      * @return
      */
     public static boolean isString(Token t) {
-        if (t != null && (t.type == STRING || t.type == STRING2)) {
-            return true;
-        } else {
-            return false;
-        }
+        return t != null && (t.type == STRING || t.type == STRING2);
     }
 }

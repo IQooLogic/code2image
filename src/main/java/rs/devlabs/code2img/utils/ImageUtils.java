@@ -10,7 +10,7 @@ import javax.imageio.ImageIO;
  *
  * @author Milos Stojkovic <iqoologic@gmail.com>
  */
-public class ImageUtils {
+public final class ImageUtils {
 
     private ImageUtils() {
     }
@@ -42,6 +42,10 @@ public class ImageUtils {
 
         public String getName() {
             return name;
+        }
+
+        public String getExtension() {
+            return name.toLowerCase();
         }
     }
 }

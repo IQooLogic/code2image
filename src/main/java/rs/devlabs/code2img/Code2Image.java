@@ -1,8 +1,5 @@
 package rs.devlabs.code2img;
 
-import java.awt.Dimension;
-import java.awt.FontMetrics;
-import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -18,7 +15,7 @@ import rs.devlabs.code2img.utils.LexerUtils;
  *
  * @author Milos Stojkovic <iqoologic@gmail.com>
  */
-public final class Code2ImageConverter {
+public final class Code2Image {
 
     // TODO : add more languages
     // TODO : add method font to theme interface
@@ -34,7 +31,7 @@ public final class Code2ImageConverter {
     private final Code2ImageSettings settings;
     private final GraphicsHelper graphicsHelper;
 
-    public Code2ImageConverter(Code2ImageSettings settings) {
+    public Code2Image(Code2ImageSettings settings) {
         this.settings = settings;
         this.graphicsHelper = new GraphicsHelper(settings);
     }
@@ -47,17 +44,7 @@ public final class Code2ImageConverter {
 
         LexerUtils.chooseLexerForFile(fileToConvert);
 
-        Dimension imageDimensions = graphicsHelper.calculateImageDimensions(lines);
-        BufferedImage image = ImageUtils.create(imageDimensions);
-        Graphics2D g = graphicsHelper.createGraphics(image);
-
-        FontMetrics metrics = g.getFontMetrics(settings.getFont());
-
-        graphicsHelper.drawWindow(g, imageDimensions);
-        graphicsHelper.drawWindowButtons(g);
-        graphicsHelper.drawLines(g, metrics, lines);
-
-        return image;
+        return graphicsHelper.draw(lines);
     }
 
     public void convertAndSave(File fileToConvert, File outputFile) throws IOException, IllegalArgumentException, RuntimeException {
