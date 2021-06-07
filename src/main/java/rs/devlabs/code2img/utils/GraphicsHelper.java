@@ -51,7 +51,7 @@ public final class GraphicsHelper {
         int x = settings.getMargin();
         int y = metrics.getAscent() + settings.getButtonsHeight() + settings.getMargin();
         if (settings.isDrawLineNumbers()) {
-            int spaceForLineNumbers = 2 * settings.getButtonSpace() + lineNumberFigures * metrics.charWidth(' ');
+            int spaceForLineNumbers = 2 * settings.getButtonSpace() + lineNumberFigures * metrics.charWidth('9');
             x = spaceForLineNumbers;
             int lineNumber = 1;
             for (String line : lines) {
@@ -82,15 +82,17 @@ public final class GraphicsHelper {
             if (optToken.isPresent()) {
                 Token token = optToken.get();
                 Color color = settings.getTheme().getColorForTokenType(token.type);
-                for (int j = 0; j < token.length; j++) {// draw all character for that token
-                    String s = String.valueOf(line.charAt(i++));// get next char
+                for (int j = 0; j < token.length; j++) { // draw all character for that token
+                    char c = line.charAt(i++);
+                    String s = String.valueOf(c);// get next char
                     drawCode(g, s, x, y, color);
-                    x += metrics.charWidth(' ');// move x right by one char width
-                }// mora da vracam 'i' i 'x'
+                    x += metrics.charWidth(c);// move x right by one char width
+                }
                 --i;// get one char back because we moved ahead by one char in j for loop
-            } else {// this is probably space only
-                drawCode(g, String.valueOf(line.charAt(i)), x, y, settings.getTheme().foreground());
-                x += metrics.charWidth(' ');// move x right by one char width
+            } else { // this is probably space only
+                char c = line.charAt(i);
+                drawCode(g, String.valueOf(c), x, y, settings.getTheme().foreground());
+                x += metrics.charWidth(c);// move x right by one char width
             }
         }
     }
@@ -123,12 +125,6 @@ public final class GraphicsHelper {
         g.setRenderingHint(
                 RenderingHints.KEY_RENDERING,
                 RenderingHints.VALUE_RENDER_QUALITY);
-//        g.setRenderingHint(
-//                RenderingHints.KEY_ALPHA_INTERPOLATION,
-//                RenderingHints.VALUE_ALPHA_INTERPOLATION_QUALITY);
-//        g.setRenderingHint(
-//                RenderingHints.KEY_FRACTIONALMETRICS,
-//                RenderingHints.VALUE_FRACTIONALMETRICS_ON);
 
         g.setFont(settings.getFont());
         return g;
@@ -156,7 +152,7 @@ public final class GraphicsHelper {
     }
 
     private int calculateLineNumbersSpace(FontMetrics metrics) {
-        return 2 * settings.getButtonSpace() + lineNumberFigures * metrics.charWidth('a');
+        return 2 * settings.getButtonSpace() + lineNumberFigures * metrics.charWidth('9');
     }
 
     public void drawWindowButtons(Graphics2D g) {

@@ -19,14 +19,11 @@ public final class Code2Image {
 
     // TODO : add more languages
     // TODO : add method font to theme interface
-    // TODO : support for more fonts (font preset as themes) and load them from file (fonts must be monospaced)
     // TODO : ability to change font style (italic, bold, plain) based on token type (for comment to be italic)
     // TODO : option to draw window buttons on the right
     // TODO : implement window border and drop shadow
-    // TODO : use json files as theme config (easily modifiable)
     // TODO : implement image watermark
     // TODO : implement image backgrounds
-    // TODO : when syntax highlighting is implemented choose language by file extension
     // TODO : create rest api endpoint for this (send settings and api returns image)
     private final Code2ImageSettings settings;
     private final GraphicsHelper graphicsHelper;

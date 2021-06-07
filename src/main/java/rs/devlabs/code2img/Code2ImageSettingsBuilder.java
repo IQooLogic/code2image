@@ -1,13 +1,14 @@
 package rs.devlabs.code2img;
 
 import java.awt.Font;
+import rs.devlabs.code2img.themes.Fonts;
 import rs.devlabs.code2img.themes.Theme;
 import rs.devlabs.code2img.themes.Themes;
 import rs.devlabs.code2img.utils.ImageUtils.ImageFormat;
 
 public class Code2ImageSettingsBuilder {
 
-    private Font font = new Font("JetBrains Mono NL", Font.PLAIN, 14);
+    private Font font = Fonts.DEFAULT;
     private int margin = 10;
     private int rectangleArc = 15;
     private int buttonRadius = 12;
